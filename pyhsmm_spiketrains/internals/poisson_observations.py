@@ -74,7 +74,7 @@ class PoissonVector(ProductDistribution, Collapsed):
 
     def resample(self,data=[],n=None,tots=None):
         # Resample rates
-        if None not in (n,tots):
+        if all(x is not None for x in (n, tots)):  # JMC 5/16/22
             for p, tot in zip(self.poissons,tots):
                 p.resample(stats=(n,tot))
         else:
