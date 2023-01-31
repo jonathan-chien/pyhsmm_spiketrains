@@ -443,11 +443,12 @@ class PoissonDATruncHDPHMM(_PoissonHMMMixin, pyhsmm.models.DATruncHDPHMM):
 
 class PoissonHSMM(_PoissonHSMMMixin, pyhsmm.models.HSMM):
     # TODO: Override PoissonHMMMixin to use HSMMStates
-    def __init__(self, N, K, alpha_obs=1.0, beta_obs=1.0,
+    def __init__(self, N, K, dur_distns, alpha_obs=1.0, beta_obs=1.0,
                  alpha_a_0=10.0, alpha_b_0=1.0,
                  init_state_concentration=1.0,
                  **kwargs):
         super(PoissonHSMM, self).__init__(
+            dur_distns=dur_distns,
             obs_distns=_make_obs_distns(K, N, alpha_obs, beta_obs),
             alpha_a_0=alpha_a_0, alpha_b_0=alpha_b_0,
             init_state_concentration=init_state_concentration,
@@ -513,12 +514,13 @@ class PoissonHSMMIntNegBinDuration(_PoissonIntNegBinHSMMMixin, pyhsmm.models.HSM
 
 
 class PoissonHDPHSMM(_PoissonHSMMMixin, pyhsmm.models.WeakLimitHDPHSMM):
-    def __init__(self, N, K_max, alpha_obs=1.0, beta_obs=1.0,
+    def __init__(self, N, K_max, dur_distns, alpha_obs=1.0, beta_obs=1.0,
                 alpha_a_0=10.0, alpha_b_0=1.0,
                 gamma_a_0=10.0, gamma_b_0=1.0,
                 init_state_concentration=1.0,
                  **kwargs):
         super(PoissonHDPHSMM, self).__init__(
+            dur_distns=dur_distns,
             obs_distns=_make_obs_distns(K_max, N, alpha_obs, beta_obs),
             alpha_a_0=alpha_a_0, alpha_b_0=alpha_b_0,
             gamma_a_0=gamma_a_0, gamma_b_0=gamma_b_0,
